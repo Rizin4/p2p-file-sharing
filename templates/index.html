@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DropCode</title>
-  <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☁️</text></svg>">
+  <link rel="icon" href='data:image/svg+xml,
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" font-size="48">🔗</text>
+</svg>'>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
@@ -21,7 +24,9 @@
       --ink: #07110d;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -196,8 +201,13 @@
       overflow-wrap: anywhere;
     }
 
-    .status.ok { color: var(--accent); }
-    .status.err { color: var(--danger); }
+    .status.ok {
+      color: var(--accent);
+    }
+
+    .status.err {
+      color: var(--danger);
+    }
 
     .code-display {
       padding: 24px 18px;
@@ -256,6 +266,7 @@
     }
   </style>
 </head>
+
 <body>
   <main>
     <header>
@@ -275,7 +286,8 @@
     <section class="panel active" id="sendPanel">
       <label class="drop-zone" id="dropZone">
         <svg class="drop-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm0 2.5L17.5 8H14zM7 13h3v-2h4v2h3l-5 5z"/>
+          <path fill="currentColor"
+            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm0 2.5L17.5 8H14zM7 13h3v-2h4v2h3l-5 5z" />
         </svg>
         <span>Drop file here or click to select</span>
         <span class="hint">PDF, images, ZIPs, text, code, and other files</span>
@@ -303,16 +315,8 @@
     </section>
 
     <section class="panel" id="receivePanel">
-      <input
-        class="code-input"
-        id="codeInput"
-        type="text"
-        inputmode="numeric"
-        maxlength="6"
-        placeholder="000000"
-        autocomplete="one-time-code"
-        oninput="this.value = this.value.replace(/\D/g, '')"
-      >
+      <input class="code-input" id="codeInput" type="text" inputmode="numeric" maxlength="6" placeholder="000000"
+        autocomplete="one-time-code" oninput="this.value = this.value.replace(/\D/g, '')">
       <button class="primary" type="button" onclick="downloadFile()">DOWNLOAD FILE</button>
       <div class="status" id="receiveStatus"></div>
     </section>
@@ -531,4 +535,5 @@
     }
   </script>
 </body>
+
 </html>
