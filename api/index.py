@@ -31,12 +31,17 @@ def load_local_env() -> None:
 
 
 load_local_env()
-app = Flask(__name__, template_folder=os.path.join(ROOT, "templates"))
+app = Flask(
+    __name__,
+    template_folder=os.path.join(ROOT, "templates"),
+    static_folder=os.path.join(ROOT, "static"),
+    static_url_path="/static",
+)
 CORS(app)
 
 BUCKET = "files"
 EXPIRY_MINUTES = 5
-SIGNED_URL_SECONDS = 60
+SIGNED_URL_SECONDS = 120
 
 
 def get_env(name: str) -> str:
@@ -156,7 +161,9 @@ def verify():
         return jsonify({"error": "Code has expired. File deleted."}), 410
 
     signed = supabase.storage.from_(BUCKET).create_signed_url(
-        record["storage_path"], SIGNED_URL_SECONDS
+        record["storage_path"],
+        SIGNED_URL_SECONDS,
+        {"download": record["filename"]},
     )
     download_url = signed.get("signedURL") or signed.get("signed_url")
 
